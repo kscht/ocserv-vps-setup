@@ -47,5 +47,5 @@ start:
 
 purge:
 	@echo "Удаление образа $(IMAGE_NAME)."
-	sudo docker rmi $(IMAGE_NAME)
+	sudo docker rmi $(CONTAINER_NAME)
 
