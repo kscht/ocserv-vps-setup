@@ -10,6 +10,7 @@ help:
 	@echo "  help   - Вывод этой справки."
 
 cert:
+	@echo "Получение сертификата для домена $(DOMAIN), оповещения на $(E_MAIL)."
 	sudo certbot certonly --standalone --preferred-challenges http -d $(DOMAIN) \
 	--non-interactive --agree-tos --email $(E_MAIL)
 
@@ -43,10 +44,6 @@ stop:
 start:
 	@echo "Запуск контейнера $(CONTAINER_NAME)."
 	sudo docker start $(CONTAINER_NAME)
-
-certbot:
-	@echo "Получение сертификатов для домена $(DOMAIN)."
-	sudo certbot certonly --standalone --preferred-challenges http -d $(DOMAIN)
 
 purge:
 	@echo "Удаление образа $(IMAGE_NAME)."
