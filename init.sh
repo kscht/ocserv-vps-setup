@@ -14,6 +14,7 @@ sudo add-apt-repository -y "deb [arch=amd64] https://download.docker.com/linux/u
 sudo apt update
 sudo apt install -y docker-ce
 sudo apt install -y make
+sudo apt install -y dialog
 
 # Перезагрузка Docker
 sudo systemctl restart docker

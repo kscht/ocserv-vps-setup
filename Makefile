@@ -6,6 +6,7 @@ help:
 	@echo "  cert   - Получение SSL сертификатов."
 	@echo "  build  - Сборка Docker образа."
 	@echo "  run    - Инициализация контейнера."
+	@echo "  config - Инициализация контейнера."
 	@echo "  stop   - Остановка контейнера."
 	@echo "  start  - Запуск контейнера."
 	@echo "  purge  - Удаление Docker образа."
@@ -44,6 +45,8 @@ stop:
 start:
 	@echo "Запуск контейнера $(CONTAINER_NAME)."
 	sudo docker start $(CONTAINER_NAME)
+config:
+	user_config.sh
 
 purge:  stop
 	@echo "Удаление образа $(IMAGE_NAME)."
