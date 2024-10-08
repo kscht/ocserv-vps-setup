@@ -1,5 +1,6 @@
-CONTAINER_NAME = ocserv
 DOMAIN = example.domain
-IMAGE_NAME = ocserv:latest
 E_MAIL = youremail@example.com
 SECRET = secret_url
+
+CONTAINER_NAME = ocserv
+IMAGE_NAME = ocserv:latest
