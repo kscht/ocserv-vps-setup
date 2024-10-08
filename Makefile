@@ -30,14 +30,14 @@ run:	build
 		--cap-add NET_ADMIN \
 		--security-opt no-new-privileges \
 		-p 443:443 \
-		-v ./ocpasswd:/etc/ocserv/ocpasswd:rw \
 		-v /etc/letsencrypt/live/$(DOMAIN)/privkey.pem:/etc/ocserv/certs/server-key.pem \
 		-v /etc/letsencrypt/live/$(DOMAIN)/cert.pem:/etc/ocserv/certs/server-cert.pem \
 		-d $(IMAGE_NAME)
-	docker exec ocserv sed -i '/^camouflage = /{s/false/true/}' /etc/ocserv/ocserv.conf
-	docker exec ocserv sed -i '/^default-domain = /{s/example.com/$(DOMAIN)/}' /etc/ocserv/ocserv.conf
-	docker exec ocserv sed -i '/^camouflage_secret = /{s/mysecretkey/$(SECRET)/}' /etc/ocserv/ocserv.conf
-	docker exec ocserv sed -i '/^keepalive = /{s/32400/0/}' /etc/ocserv/ocserv.conf
+	sudo docker exec ocserv sed -i '/^camouflage = /{s/false/true/}' /etc/ocserv/ocserv.conf
+	sudo docker exec ocserv sed -i '/^default-domain = /{s/example.com/$(DOMAIN)/}' /etc/ocserv/ocserv.conf
+	sudo docker exec ocserv sed -i '/^camouflage_secret = /{s/mysecretkey/$(SECRET)/}' /etc/ocserv/ocserv.conf
+	sudo docker exec ocserv sed -i '/^keepalive = /{s/32400/0/}' /etc/ocserv/ocserv.conf
+	tr -dc A-Za-z0-9 </dev/urandom | head -c 12|sudo docker exec -i ocserv ocpasswd -c /etc/ocserv/ocpasswd q
 
 stop:
 	@echo "Остановка контейнера $(CONTAINER_NAME)."
