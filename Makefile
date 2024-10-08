@@ -58,17 +58,17 @@ purge:  stop
 	sudo docker rmi $(CONTAINER_NAME)
 
 
-backup:        start
+backup:
 	@read -p "Вы действительно хотите восстановить базу пользователей? (y/n): " CONFIRM; \
 	if [ "$$CONFIRM" = "y" ]; then \
-		echo "Восстанавливаем базу пользователей."; \
+		echo "Копируем базу пользователей."; \
 		sudo docker cp $(CONTAINER_NAME):/etc/ocserv/ocpasswd ./ocpasswd \
 	else \
-		echo "Операция восстановления отменена."; \
+		echo "Операция копирования отменена."; \
 	fi
 
 
-restore:        start
+restore:
 	@read -p "Вы действительно хотите восстановить базу пользователей? (y/n): " CONFIRM; \
 	if [ "$$CONFIRM" = "y" ]; then \
 		echo "Восстанавливаем базу пользователей."; \
