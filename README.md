@@ -1,5 +1,9 @@
 # ocserv-vps-setup
 
+Используйте Cisco AnyConnect или OpenConnect VPN:
+https://ваш_домен.ру/?secret
+
+
 ```bash
 git clone --recurse-submodules  https://github.com/kscht/ocserv-vps-setup.git
 cd ocserv-vps-setup
@@ -22,4 +26,8 @@ make build
 
 ```bash
 make run
+```
+
+```bash
+make config
 ```
