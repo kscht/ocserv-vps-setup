@@ -46,7 +46,7 @@ start:
 	@echo "Запуск контейнера $(CONTAINER_NAME)."
 	sudo docker start $(CONTAINER_NAME)
 config:
-	user_config.sh
+	./user_config.sh
 
 purge:  stop
 	@echo "Удаление образа $(IMAGE_NAME)."
