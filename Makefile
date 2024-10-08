@@ -3,14 +3,17 @@ include settings.env
 
 help:
 	@echo "Доступные команды:"
-	@echo "  cert   - Получение SSL сертификатов."
-	@echo "  build  - Сборка Docker образа."
-	@echo "  run    - Инициализация контейнера."
-	@echo "  config - Редактирование списка пользователей."
-	@echo "  stop   - Остановка контейнера."
-	@echo "  start  - Запуск контейнера."
-	@echo "  purge  - Удаление Docker образа."
-	@echo "  help   - Вывод этой справки."
+	@echo "  cert    - Получение SSL сертификатов."
+	@echo "  build   - Сборка Docker образа."
+	@echo "  run     - Инициализация контейнера."
+	@echo "  config  - Редактирование списка пользователей."
+	@echo "  stop    - Остановка контейнера."
+	@echo "  start   - Запуск контейнера."
+	@echo "  backup  - Скопировать базу пользователей."
+	@echo "  restore - Восстановить базу пользователей."
+	@echo "  purge   - Удаление Docker образа."
+	@echo "  help    - Вывод этой справки."
+
 
 cert:
 	@echo "Получение сертификата для домена $(DOMAIN), оповещения на $(E_MAIL)."
@@ -54,10 +57,22 @@ purge:  stop
 	sudo docker rm $(CONTAINER_NAME)
 	sudo docker rmi $(CONTAINER_NAME)
 
-backup:	start
-	@echo "Создаем архив базы пользователей."
-	sudo docker cp $(CONTAINER_NAME):/etc/ocserv/ocpasswd ./ocpasswd
 
-restore:	start
-	@echo "Восстанавливаем базу пользователей."
-	sudo docker cp ./ocpasswd $(CONTAINER_NAME):/etc/ocserv/ocpasswd
+backup:        start
+	@read -p "Вы действительно хотите восстановить базу пользователей? (y/n): " CONFIRM; \
+	if [ "$$CONFIRM" = "y" ]; then \
+		echo "Восстанавливаем базу пользователей."; \
+		sudo docker cp $(CONTAINER_NAME):/etc/ocserv/ocpasswd ./ocpasswd \
+	else \
+		echo "Операция восстановления отменена."; \
+	fi
+
+
+restore:        start
+	@read -p "Вы действительно хотите восстановить базу пользователей? (y/n): " CONFIRM; \
+	if [ "$$CONFIRM" = "y" ]; then \
+		echo "Восстанавливаем базу пользователей."; \
+		sudo docker cp ./ocpasswd $(CONTAINER_NAME):/etc/ocserv/ocpasswd; \
+	else \
+		echo "Операция восстановления отменена."; \
+	fi
