@@ -62,7 +62,7 @@ backup:
 	@read -p "Вы действительно хотите восстановить базу пользователей? (y/n): " CONFIRM; \
 	if [ "$$CONFIRM" = "y" ]; then \
 		echo "Копируем базу пользователей."; \
-		sudo docker cp $(CONTAINER_NAME):/etc/ocserv/ocpasswd ./ocpasswd \
+		sudo docker cp $(CONTAINER_NAME):/etc/ocserv/ocpasswd ./ocpasswd; \
 	else \
 		echo "Операция копирования отменена."; \
 	fi
