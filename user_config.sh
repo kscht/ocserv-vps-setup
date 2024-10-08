@@ -1,24 +1,5 @@
 #!/bin/bash
 
-# Функция для генерации случайного пароля
-generate_random_password() {
-    # Генерация пароля из 12 символов
-    tr -dc A-Za-z0-9 </dev/urandom | head -c 12 ; echo ''
-}
-
-# Проверка существования файла со списком пользователей
-PASSWORD_FILE="/etc/ocserv/ocpasswd"
-if ! sudo docker exec -i ocserv test -f "$PASSWORD_FILE"; then
-    echo "User password file does not exist. Creating a default user."
-
-    RANDOM_PASSWORD=$(generate_random_password)
-    echo "Generated random password: $RANDOM_PASSWORD"
-
-    echo "$RANDOM_PASSWORD" | sudo docker exec -i ocserv ocpasswd -c "$PASSWORD_FILE" "myusername"
-    echo "User 'myusername' created with a random password."
-fi
-
-
 # Функция для получения списка пользователей
 get_user_list() {
     sudo docker exec -i ocserv cat /etc/ocserv/ocpasswd | cut -d ':' -f1
