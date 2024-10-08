@@ -54,3 +54,10 @@ purge:  stop
 	sudo docker rm $(CONTAINER_NAME)
 	sudo docker rmi $(CONTAINER_NAME)
 
+backup:	run
+	@echo "Создаем архив базы пользователей."
+	sudo docker cp $(CONTAINER_NAME):/etc/ocserv/ocpasswd ./ocpasswd
+
+restore:	run
+	@echo "Восстанавливаем базу пользователей."
+	sudo docker cp ./ocpasswd $(CONTAINER_NAME):/etc/ocserv/ocpasswd
