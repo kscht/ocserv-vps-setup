@@ -3,6 +3,7 @@ include settings.env
 
 help:
 	@echo "Доступные команды:"
+	@echo "  cert   - Получение SSL сертификатов."
 	@echo "  build  - Сборка Docker образа."
 	@echo "  run    - Инициализация контейнера."
 	@echo "  stop   - Остановка контейнера."
@@ -20,7 +21,8 @@ build:
 	sed -i '/&& \.\/configure \\/ s/&& \.\/configure /&--without-gnutls /' Dockerfile.tmp
 	cd docker-ocserv && sudo docker build -f Dockerfile.tmp -t $(IMAGE_NAME) . && \
 	rm Dockerfile.tmp
-run:
+
+run:	build	
 	@echo "Запуск контейнера $(CONTAINER_NAME) из образа $(IMAGE_NAME)."
 	sudo docker run --name $(CONTAINER_NAME) \
 		--sysctl net.ipv4.ip_forward=1 \
