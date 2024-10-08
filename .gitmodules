@@ -1,0 +1,3 @@
+[submodule "docker-ocserv"]
+	path = docker-ocserv
+	url = https://github.com/aminvakil/docker-ocserv.git
