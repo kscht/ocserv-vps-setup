@@ -4,9 +4,10 @@ include settings.env
 help:
 	@echo "Доступные команды:"
 	@echo "  build  - Сборка Docker образа."
-	@echo "  run    - Запуск контейнера."
+	@echo "  run    - Инициализация контейнера."
 	@echo "  stop   - Остановка контейнера."
-	@echo "  clean  - Удаление Docker образа."
+	@echo "  start  - Запуск контейнера."
+	@echo "  purge  - Удаление Docker образа."
 	@echo "  help   - Вывод этой справки."
 
 cert:
@@ -30,8 +31,6 @@ run:
 		-v /etc/letsencrypt/live/$(DOMAIN)/privkey.pem:/etc/ocserv/certs/server-key.pem \
 		-v /etc/letsencrypt/live/$(DOMAIN)/cert.pem:/etc/ocserv/certs/server-cert.pem \
 		-d $(IMAGE_NAME)
-
-init:
 	docker exec ocserv sed -i '/^camouflage = /{s/false/true/}' /etc/ocserv/ocserv.conf
 	docker exec ocserv sed -i '/^default-domain = /{s/example.com/$(DOMAIN)/}' /etc/ocserv/ocserv.conf
 	docker exec ocserv sed -i '/^camouflage_secret = /{s/mysecretkey/$(SECRET)/}' /etc/ocserv/ocserv.conf
@@ -45,7 +44,7 @@ start:
 	@echo "Запуск контейнера $(CONTAINER_NAME)."
 	sudo docker start $(CONTAINER_NAME)
 
-purge:
+purge:  stop
 	@echo "Удаление образа $(IMAGE_NAME)."
 	sudo docker rm $(CONTAINER_NAME)
 	sudo docker rmi $(CONTAINER_NAME)
