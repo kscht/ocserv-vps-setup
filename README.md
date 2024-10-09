@@ -12,6 +12,13 @@ cd ocserv-vps-setup
 cp settings.example settings.env
 ```
 
+Отредактируй  значения конфигурационных опций в файле settings.env
+
+DOMAIN = example.domain
+E_MAIL = youremail@example.com
+SECRET = secret_key
+
+
 ```
 nano settings.env
 ```
