@@ -1,6 +1,6 @@
 DOMAIN = example.domain
 E_MAIL = youremail@example.com
-SECRET = secret_url
+SECRET = secret_key
 
 CONTAINER_NAME = ocserv
 IMAGE_NAME = ocserv:latest
