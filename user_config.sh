@@ -1,8 +1,19 @@
 #!/bin/bash
 
+# Функция для чтения настроек из файла settings.env
+load_settings() {
+    if [ -f settings.env ]; then
+        # Читаем файл и извлекаем значение CONTAINER_NAME
+        CONTAINER_NAME=$(grep "CONTAINER_NAME" settings.env | cut -d '=' -f2 | xargs)
+    else
+        echo "Ошибка: файл settings.env не найден."
+        exit 1
+    fi
+}
+
 # Функция для получения списка пользователей
 get_user_list() {
-    sudo docker exec -i ocserv cat /etc/ocserv/ocpasswd | cut -d ':' -f1
+    sudo docker exec -i $(CONTAINER_NAME) cat /etc/$(CONTAINER_NAME)/ocpasswd | cut -d ':' -f1
 }
 
 # Функция для главного меню
@@ -72,7 +83,7 @@ add_user() {
     if [ ! -z "$NEW_USER" ]; then
         NEW_PASS=$(dialog --stdout --inputbox "Введите пароль:" 8 40)
         if [ ! -z "$NEW_PASS" ]; then
-            echo "$NEW_PASS" | sudo docker exec -i ocserv ocpasswd -c /etc/ocserv/ocpasswd "$NEW_USER"
+            echo "$NEW_PASS" | sudo docker exec -i $(CONTAINER_NAME) ocpasswd -c /etc/$(CONTAINER_NAME)/ocpasswd "$NEW_USER"
         fi
     fi
 }
@@ -80,7 +91,7 @@ add_user() {
 # Функция для удаления пользователя
 delete_user() {
     USERNAME=$1
-    sudo docker exec -i ocserv ocpasswd -c /etc/ocserv/ocpasswd -d "$USERNAME"
+    sudo docker exec -i $(CONTAINER_NAME) ocpasswd -c /etc/$(CONTAINER_NAME)/ocpasswd -d "$USERNAME"
 }
 
 # Функция для смены пароля
@@ -88,21 +99,22 @@ change_password() {
     USERNAME=$1
     NEW_PASS=$(dialog --stdout --inputbox "Введите новый праоль для $USERNAME:" 8 40)
     if [ ! -z "$NEW_PASS" ]; then
-        echo "$NEW_PASS" | sudo docker exec -i ocserv ocpasswd -c /etc/ocserv/ocpasswd "$USERNAME"
+        echo "$NEW_PASS" | sudo docker exec -i $(CONTAINER_NAME) ocpasswd -c /etc/$(CONTAINER_NAME)/ocpasswd "$USERNAME"
     fi
 }
 
 # Функция для блокировки пользователя
 block_user() {
     USERNAME=$1
-    sudo docker exec -i ocserv ocpasswd -c /etc/ocserv/ocpasswd -l "$USERNAME"
+    sudo docker exec -i $(CONTAINER_NAME) ocpasswd -c /etc/$(CONTAINER_NAME)/ocpasswd -l "$USERNAME"
 }
 
 # Функция для разблокировки пользователя
 unblock_user() {
     USERNAME=$1
-    sudo docker exec -i ocserv ocpasswd -c /etc/ocserv/ocpasswd -u "$USERNAME"
+    sudo docker exec -i $(CONTAINER_NAME) ocpasswd -c /etc/$(CONTAINER_NAME)/ocpasswd -u "$USERNAME"
 }
 
 # Главное меню
+load_settings
 main_menu
