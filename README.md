@@ -23,19 +23,27 @@ SECRET = secret_key
 nano settings.env
 ```
 
+Настройте получение и обновление SSL сертификатов от Let's Encrypt
 
 ```bash
 make cert
 ```
 
+Собертите образ контейнера
+
 ```bash
 make build
 ```
+
+Запустите контейнер с VPN сервером
 
 ```bash
 make run
 ```
 
+Отредактируйте базу пользователей
+
 ```bash
 make config
 ```
+
