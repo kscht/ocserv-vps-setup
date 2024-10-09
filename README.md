@@ -5,7 +5,7 @@ https://ваш_домен/?secret_key
 
 
 ```bash
-git clone --recurse-submodules  https://github.com/kscht/ocserv-vps-setup.git
+git clone https://github.com/kscht/ocserv-vps-setup.git
 cd ocserv-vps-setup
 ./system_update.sh
 ./prebuild_setup.sh
