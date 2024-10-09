@@ -86,7 +86,7 @@ delete_user() {
 # Функция для смены пароля
 change_password() {
     USERNAME=$1
-    NEW_PASS=$(dialog --stdout --passwordbox "Enter new password for $USERNAME:" 8 40)
+    NEW_PASS=$(dialog --stdout --inputbox "Enter new password for $USERNAME:" 8 40)
     if [ ! -z "$NEW_PASS" ]; then
         echo "$NEW_PASS" | sudo docker exec -i ocserv ocpasswd -c /etc/ocserv/ocpasswd "$USERNAME"
     fi
