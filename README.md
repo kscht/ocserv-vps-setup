@@ -15,12 +15,6 @@ cp settings.example settings.env
 Отредактируйте значения конфигурационных опций в файле settings.env
 
 ```
-DOMAIN = example.domain
-E_MAIL = youremail@example.com
-SECRET = secret_key
-```
-
-```
 nano settings.env
 ```
 
