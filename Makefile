@@ -33,6 +33,7 @@ run:	build
 		--cap-add NET_ADMIN \
 		--security-opt no-new-privileges \
 		-p 443:443 \
+		-p 443:443/udp \
 		-v /etc/letsencrypt/live/$(DOMAIN)/privkey.pem:/etc/ocserv/certs/server-key.pem \
 		-v /etc/letsencrypt/live/$(DOMAIN)/cert.pem:/etc/ocserv/certs/server-cert.pem \
 		-d $(IMAGE_NAME)
