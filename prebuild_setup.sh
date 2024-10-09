@@ -1,8 +1,5 @@
 #!/bin/bash
 
-sudo apt update
-sudo apt full-upgrade -y
-
 # Установка Certbot
 sudo apt install -y software-properties-common
 sudo apt install -y certbot
