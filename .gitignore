@@ -1,4 +1,4 @@
 *~
 *.tmp
-./settings.env
-./ocpasswd
+settings.env
+ocpasswd
