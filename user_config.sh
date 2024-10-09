@@ -70,7 +70,7 @@ user_menu() {
 add_user() {
     NEW_USER=$(dialog --stdout --inputbox "Введите имя нового пользователя:" 8 40)
     if [ ! -z "$NEW_USER" ]; then
-        NEW_PASS=$(dialog --stdout --passwordbox "Введите пароль:" 8 40)
+        NEW_PASS=$(dialog --stdout --inputbox "Введите пароль:" 8 40)
         if [ ! -z "$NEW_PASS" ]; then
             echo "$NEW_PASS" | sudo docker exec -i ocserv ocpasswd -c /etc/ocserv/ocpasswd "$NEW_USER"
         fi
