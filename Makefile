@@ -37,11 +37,11 @@ run:	build
 		-v /etc/letsencrypt/live/$(DOMAIN)/privkey.pem:/etc/ocserv/certs/server-key.pem \
 		-v /etc/letsencrypt/live/$(DOMAIN)/cert.pem:/etc/ocserv/certs/server-cert.pem \
 		-d $(IMAGE_NAME)
-	sudo docker exec ocserv sed -i '/^camouflage = /{s/false/true/}' /etc/ocserv/ocserv.conf
-	sudo docker exec ocserv sed -i '/^default-domain = /{s/example.com/$(DOMAIN)/}' /etc/ocserv/ocserv.conf
-	sudo docker exec ocserv sed -i '/^camouflage_secret = /{s/mysecretkey/$(SECRET)/}' /etc/ocserv/ocserv.conf
-	sudo docker exec ocserv sed -i '/^keepalive = /{s/32400/0/}' /etc/ocserv/ocserv.conf
-	tr -dc A-Za-z0-9 </dev/urandom | head -c 12|sudo docker exec -i ocserv ocpasswd -c /etc/ocserv/ocpasswd q
+	sudo docker exec $(CONTAINER_NAME) sed -i '/^camouflage = /{s/false/true/}' /etc/ocserv/ocserv.conf
+	sudo docker exec $(CONTAINER_NAME) sed -i '/^default-domain = /{s/example.com/$(DOMAIN)/}' /etc/ocserv/ocserv.conf
+	sudo docker exec $(CONTAINER_NAME) sed -i '/^camouflage_secret = /{s/mysecretkey/$(SECRET)/}' /etc/ocserv/ocserv.conf
+	sudo docker exec $(CONTAINER_NAME) sed -i '/^keepalive = /{s/32400/0/}' /etc/ocserv/ocserv.conf
+	tr -dc A-Za-z0-9 </dev/urandom | head -c 12|sudo docker exec -i $(CONTAINER_NAME) ocpasswd -c /etc/ocserv/ocpasswd q
 
 stop:
 	@echo "Остановка контейнера $(CONTAINER_NAME)."
