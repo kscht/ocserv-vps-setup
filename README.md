@@ -4,6 +4,8 @@
 https://ваш_домен/?secret_key
 
 
+Выполните эти инструкции, чтобы подготовить VPS к дальнейшей настройке
+
 ```bash
 git clone https://github.com/kscht/ocserv-vps-setup.git
 cd ocserv-vps-setup
