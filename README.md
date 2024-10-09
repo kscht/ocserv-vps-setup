@@ -45,8 +45,3 @@ make run
 make config
 ```
 
-Перезагрузите VPS
-
-```bash
-sudo reboot
-```
