@@ -4,7 +4,7 @@
 load_settings() {
     if [ -f settings.env ]; then
         # Читаем файл и извлекаем значение CONTAINER_NAME
-        CONTAINER_NAME=$(grep "CONTAINER_NAME" settings.env | cut -d '=' -f2 | xargs)
+        CONTAINER_NAME=$(grep "^CONTAINER_NAME" settings.env | cut -d '=' -f2 | xargs)
     else
         echo "Ошибка: файл settings.env не найден."
         exit 1
