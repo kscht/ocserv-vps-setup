@@ -16,3 +16,6 @@ sudo apt install -y dialog
 # Перезагрузка Docker
 sudo systemctl restart docker
 
+# Обновление модулей git
+git submodule init
+git submodule update

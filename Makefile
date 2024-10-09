@@ -21,8 +21,6 @@ cert:
 	--non-interactive --agree-tos --email $(E_MAIL)
 
 build:
-	git submodule init
-	git submodule update
 	cd docker-ocserv && cp Dockerfile Dockerfile.tmp && \
 	sed -i '/&& \.\/configure \\/ s/&& \.\/configure /&--without-gnutls /' Dockerfile.tmp
 	cd docker-ocserv && sudo docker build -f Dockerfile.tmp -t $(IMAGE_NAME) . && \
