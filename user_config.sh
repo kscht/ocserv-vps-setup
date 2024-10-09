@@ -16,8 +16,8 @@ main_menu() {
         done
 
         # Показываем меню диалога
-        OPTION=$(dialog --clear --stdout --title "User Management" --menu "Select a user or option:" 15 50 7 \
-            "Add" "Add new user" \
+        OPTION=$(dialog --clear --stdout --title "База пользователей" --menu "Выберите пользователя или добавьте:" 15 50 7 \
+            "Add" "Добавить" \
             ${MENU_USERS})
         
         # Обработка выбранного пункта меню
@@ -40,11 +40,11 @@ main_menu() {
 # Функция для меню пользователя
 user_menu() {
     USERNAME=$1
-    ACTION=$(dialog --clear --stdout --title "Actions for $USERNAME" --menu "Select an action:" 15 50 5 \
-        "Delete" "Delete user" \
-        "ChangePassword" "Change password" \
-        "Block" "Block user" \
-        "Unblock" "Unblock user")
+    ACTION=$(dialog --clear --stdout --title "Опции для $USERNAME" --menu "Выберите действие:" 15 50 5 \
+        "Delete" "Удалить" \
+        "ChangePassword" "Изменить пароль" \
+        "Block" "Блокировать" \
+        "Unblock" "Разблокировать")
 
     case "$ACTION" in
         "Delete")
@@ -68,9 +68,9 @@ user_menu() {
 
 # Функция для добавления нового пользователя
 add_user() {
-    NEW_USER=$(dialog --stdout --inputbox "Enter new username:" 8 40)
+    NEW_USER=$(dialog --stdout --inputbox "Введите имя нового пользователя:" 8 40)
     if [ ! -z "$NEW_USER" ]; then
-        NEW_PASS=$(dialog --stdout --passwordbox "Enter password:" 8 40)
+        NEW_PASS=$(dialog --stdout --passwordbox "Введите пароль:" 8 40)
         if [ ! -z "$NEW_PASS" ]; then
             echo "$NEW_PASS" | sudo docker exec -i ocserv ocpasswd -c /etc/ocserv/ocpasswd "$NEW_USER"
         fi
@@ -86,7 +86,7 @@ delete_user() {
 # Функция для смены пароля
 change_password() {
     USERNAME=$1
-    NEW_PASS=$(dialog --stdout --inputbox "Enter new password for $USERNAME:" 8 40)
+    NEW_PASS=$(dialog --stdout --inputbox "Введите новый праоль для $USERNAME:" 8 40)
     if [ ! -z "$NEW_PASS" ]; then
         echo "$NEW_PASS" | sudo docker exec -i ocserv ocpasswd -c /etc/ocserv/ocpasswd "$USERNAME"
     fi

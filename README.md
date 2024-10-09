@@ -1,7 +1,7 @@
 # ocserv-vps-setup
 
 Используйте Cisco AnyConnect или OpenConnect VPN:
-https://ваш_домен.ру/?secret
+https://ваш_домен/?secret_key
 
 
 ```bash
