@@ -21,8 +21,8 @@ cert:
 	--non-interactive --agree-tos --email $(E_MAIL)
 
 build:
-	#sed -i '/&& \.\/configure \\/ s/&& \.\/configure /&--without-gnutls /' Dockerfile.tmp
 	cd docker-ocserv && cp Dockerfile Dockerfile.tmp && \
+	sed -i '/&& \.\/configure \\/ s/&& \.\/configure /&--without-gnutls /' Dockerfile.tmp
 	cd docker-ocserv && sudo docker build -f Dockerfile.tmp -t $(IMAGE_NAME) . && \
 	rm Dockerfile.tmp
 
