@@ -22,7 +22,7 @@ cert:
 
 build:
 	cd docker-ocserv && cp Dockerfile Dockerfile.tmp && \
-	cd docker-ocserv && sudo docker build -f Dockerfile.tmp -t $(IMAGE_NAME) . && \
+	sudo docker build -f Dockerfile.tmp -t $(IMAGE_NAME) . && \
 	rm Dockerfile.tmp
 
 run:	build	
