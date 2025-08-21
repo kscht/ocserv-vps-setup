@@ -28,6 +28,7 @@ build:
 run:	build	
 	@echo "Запуск контейнера $(CONTAINER_NAME) из образа $(IMAGE_NAME)."
 	sudo docker run --name $(CONTAINER_NAME) \
+		--restart unless-stopped \
 		--sysctl net.ipv4.ip_forward=1 \
 		--cap-add NET_ADMIN \
 		--security-opt no-new-privileges \
