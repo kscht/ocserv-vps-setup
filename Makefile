@@ -40,7 +40,7 @@ run:	build
 	sudo docker exec $(CONTAINER_NAME) sed -i '/^default-domain = /{s/example.com/$(DOMAIN)/}' /etc/ocserv/ocserv.conf
 	sudo docker exec $(CONTAINER_NAME) sed -i '/^camouflage_secret = /{s/mysecretkey/$(SECRET)/}' /etc/ocserv/ocserv.conf
 	sudo docker exec $(CONTAINER_NAME) sed -i '/^keepalive = /{s/32400/0/}' /etc/ocserv/ocserv.conf
-	sudo docker exec $(CONTAINER_NAME) sed -i '/^tls-priorites=/c\tls-priorities = "NORMAL:-VERS-ALL:+VERS-TLS1.3:+VERS-TLS1.2:-CIPHER-ALL:+AES-128-GCM:+AES-256-GCM:+CHACHA20-POLY1305:-GROUP-ALL:+GROUP-X25519:+GROUP-SECP256R1:%SERVER_PRECEDENCE:%COMPAT"' /etc/ocserv/ocserv.conf
+	sudo docker exec $(CONTAINER_NAME) sed -i '/^tls-priorites =/c\tls-priorities = "NORMAL:-VERS-ALL:+VERS-TLS1.3:+VERS-TLS1.2:-CIPHER-ALL:+AES-128-GCM:+AES-256-GCM:+CHACHA20-POLY1305:-GROUP-ALL:+GROUP-X25519:+GROUP-SECP256R1:%SERVER_PRECEDENCE:%COMPAT"' /etc/ocserv/ocserv.conf
 	sudo docker exec $(CONTAINER_NAME) sed -i '/^mtu =/c\mtu = 1280' /etc/ocserv/ocserv.conf
 	tr -dc A-Za-z0-9 </dev/urandom | head -c 12|sudo docker exec -i $(CONTAINER_NAME) ocpasswd -c /etc/ocserv/ocpasswd q
 
